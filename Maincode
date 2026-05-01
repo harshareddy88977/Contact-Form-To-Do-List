@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task 2 - Contact Form & To-Do List</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+        }
+
+        header {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 22px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f1f1f1;
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete {
+            background: red;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .delete:hover {
+            background: darkred;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Task 2 Project</h1>
+</header>
+
+<!-- CONTACT FORM -->
+<div class="container">
+    <h2>Contact Form</h2>
+
+    <form onsubmit="return validateForm()">
+        <input type="text" id="name" placeholder="Enter your name">
+        <input type="email" id="email" placeholder="Enter your email">
+        <textarea id="message" placeholder="Your message"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<!-- TODO LIST -->
+<div class="container">
+    <h2>To-Do List</h2>
+
+    <input type="text" id="taskInput" placeholder="Enter task">
+    <button onclick="addTask()">Add Task</button>
+
+    <ul id="taskList"></ul>
+</div>
+
+<footer>
+    <p>© 2026 Harsha Reddy</p>
+</footer>
+
+<script>
+    // FORM VALIDATION
+    function validateForm() {
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+
+        if (name === "" || email === "") {
+            alert("Please fill all fields");
+            return false;
+        }
+
+        if (!email.includes("@")) {
+            alert("Enter valid email");
+            return false;
+        }
+
+        alert("Form submitted successfully!");
+        return true;
+    }
+
+    // TODO LIST
+    function addTask() {
+        let taskInput = document.getElementById("taskInput");
+        let taskText = taskInput.value;
+
+        if (taskText === "") {
+            alert("Enter a task");
+            return;
+        }
+
+        let li = document.createElement("li");
+        li.innerHTML = taskText + 
+        ' <button class="delete" onclick="removeTask(this)">X</button>';
+
+        document.getElementById("taskList").appendChild(li);
+
+        taskInput.value = "";
+    }
+
+    function removeTask(button) {
+        button.parentElement.remove();
+    }
+</script>
+
+</body>
+</html>
